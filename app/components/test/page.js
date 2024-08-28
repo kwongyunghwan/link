@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import React, { useState } from 'react';
-import Modal from '../modal/Modal';
+import Modal from '../Modal';
 
 const HomePage = () => {
   const [isModalOpen, setModalOpen] = useState(false);
