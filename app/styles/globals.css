@@ -34,13 +34,14 @@ a{
 }
 .plus_link_layout{
   margin: 20px auto;
-  width: 200px;
+  width: 100px;
   background: white;
   color: white;
   border-radius:10px;
   border-style:dotted;
   border-color: grey;
   text-align:center;
+  cursor:pointer;
   padding:10px;
 }
 .link_layout{

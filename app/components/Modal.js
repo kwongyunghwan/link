@@ -1,21 +1,38 @@
 import React, { useState } from 'react';
 import '../styles/module.css'
 
-const Modal = ({ isOpen, onClose }) => {
+const Modal = ({ id, isOpen, onClose }) => {
   if (!isOpen) return null;
 
 const [linkURL, setlinkURL] = useState('');
 const [linkName, setlinkName] = useState('');
 const [linkImage, setlinkImage] = useState('');
-
-const handleSubmit = (event) =>{
-  event.preventDefault();
-  console.log('submit values:', {linkURL, linkName,linkImage});
+console.log(id);
+const InsertBookMark = async(e) =>{
+  e.preventDefault();
+  try{
+    const res = await fetch('/api/createBookMark',{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        linkURL: linkURL,
+        linkName: linkName,
+        linkImage: linkImage,
+        bookMarkId: id,
+      })
+    });
+    console.log("생성 완료",'submit values:', {linkURL, linkName,linkImage,id});
+    onClose();
+  }catch(error){
+    console.error("생성 오류", error)
+  }
 }
   return (
     <div className="modal-overlay">
       <div className="modal">
-          <form onSubmit = {handleSubmit}>
+          <form onSubmit = {InsertBookMark}>
             <div className="close_button"><button onClick={onClose}>닫기</button></div>
             <div className='modal_title'>북마크</div>
             <p>북마크할 링크를 작성해 주세요.</p>
