@@ -36,6 +36,8 @@ margin, padding : top right bottom left
 
 .modal_input{
   width:200px;
+  margin-left: 5%;
+  margin-top: 10px;
 }
 
 .close_button {

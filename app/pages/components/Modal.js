@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styles/module.css'
+import '../../styles/module.css'
 
 const Modal = ({ id, isOpen, onClose }) => {
   if (!isOpen) return null;
@@ -7,7 +7,7 @@ const Modal = ({ id, isOpen, onClose }) => {
 const [linkURL, setlinkURL] = useState('');
 const [linkName, setlinkName] = useState('');
 const [linkImage, setlinkImage] = useState('');
-console.log(id);
+
 const InsertBookMark = async(e) =>{
   e.preventDefault();
   try{

@@ -1,13 +1,13 @@
 'use client';
-import Link from "next/link";
 import React, { useState, useEffect } from 'react';
-import Modal from '../Modal';
+import Modal from '../components/Modal';
+import { useSelector } from 'react-redux';
 
 export default function main() {
   const [linkData, setLinkData] = useState([]);
   const [isModalOpen, setModalOpen] = useState(false);
-  const id = "ruin";
-
+  const id = useSelector((state) => state.userInput.inputValue);
+  console.log("id>>>>>",id);
   useEffect(() => {
     const readBookMark = async () => {
       try {
@@ -17,7 +17,6 @@ export default function main() {
         }
         const data = await res.json();
         setLinkData(data);
-        console.log(data);
       } catch (error) {
         console.error('불러오기 오류 :', error);
       }
@@ -28,7 +27,6 @@ export default function main() {
 
   return (
       <div>
-        <div className="title"><Link href="/"><img src="/title.png" className ="title_image"/></Link></div>
         {
           linkData.map((e,index)=>{
             return(

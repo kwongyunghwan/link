@@ -54,9 +54,53 @@ a{
   padding:10px;
   height:30px;
 }
-
+.des_container{
+  display: flex;
+  justify-content: center; /* 수평 중앙 정렬 */
+  align-items: center; /* 수직 중앙 정렬 */
+  flex-direction: column; /* 수직 정렬을 강제 */
+  margin: 20px auto;
+  width: 600px;
+  background: white;
+  color: grey;
+  border-radius:10px;
+  text-align:center;
+  padding:10px;
+}
+.createButton{
+  background: white;
+  color: grey;
+  border-radius:5px;
+  text-align:center;
+  margin-left:10px;
+  width:20%;
+  font-size:18px;
+  height:100%;
+  cursor: pointer;
+  border: 0px;
+}
+.joinButton{
+  background: white;
+  color: grey;
+  border-radius:5px;
+  text-align:center;
+  margin-left:10px;
+  width:5%;
+  height:100%;
+  cursor: pointer;
+  border: 0px;
+}
 .link_image{
   width: 30px;
   margin-right:5px;
   vertical-align: middle;
+}
+.bold{
+  font-weight: bold;
+}
+
+.center-text {
+  display: flex;
+  justify-content: center; /* 수평 중앙 정렬 */
+  align-items: center; /* 수직 중앙 정렬 */
 }
