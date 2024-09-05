@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../../styles/module.css'
 
-const Modal = ({ id, isOpen, onClose }) => {
+const Modal = ({ bookMarkId, isOpen, onClose }) => {
   if (!isOpen) return null;
 
 const [linkURL, setlinkURL] = useState('');
@@ -17,13 +17,13 @@ const InsertBookMark = async(e) =>{
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        linkURL: linkURL,
+        linkURL: linkURL.startsWith("http") ? linkURL : "http://" + linkURL,
         linkName: linkName,
         linkImage: linkImage,
-        bookMarkId: id,
+        bookMarkId: bookMarkId,
       })
     });
-    console.log("생성 완료",'submit values:', {linkURL, linkName,linkImage,id});
+    console.log("생성 완료",'submit values:', {linkURL, linkName,linkImage,bookMarkId});
     onClose();
   }catch(error){
     console.error("생성 오류", error)

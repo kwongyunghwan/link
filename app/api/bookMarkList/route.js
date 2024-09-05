@@ -3,7 +3,7 @@ import { connectToDatabase } from '../../../lib/mongo';
 
 export async function GET(req) {
     const { searchParams } = new URL(req.url);
-    const bookMarkId = searchParams.get('id');
+    const bookMarkId = searchParams.get('bookMarkId');
     const {db} = await connectToDatabase();
     try {
       const result = await db.collection('data').find({ bookMarkId: bookMarkId }).toArray();

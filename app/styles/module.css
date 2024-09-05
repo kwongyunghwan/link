@@ -17,8 +17,9 @@ margin, padding : top right bottom left
 .modal {
   position: relative;
   background: white;
-  padding: 30px 150px 30px 150px;
+  width:40%;
   border-radius: 5px;
+  padding:20px;
 }
 
 .modal_title {
