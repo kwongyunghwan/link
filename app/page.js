@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import Link from "next/link";
-import './styles/module.css';
+import './styles/modal.css';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { setInputValue } from './store/userInputSlice';
