@@ -7,8 +7,9 @@ export default function main() {
   const [linkData, setLinkData] = useState([]);
   const [isModalOpen, setModalOpen] = useState(false);
   const bookMarkId = useSelector((state) => state.userInput.inputValue);
+
   const deleteBookMark = async ({linkURL, linkName, bookMarkId}) => {
-    console.log(linkURL, linkName, bookMarkId);
+
     try {
       const res = await fetch('/api/deleteBookMark', {
         method: 'POST',
@@ -48,6 +49,7 @@ export default function main() {
 
     readBookMark();
   }, [linkData]);
+
 
   return (
       <div>
