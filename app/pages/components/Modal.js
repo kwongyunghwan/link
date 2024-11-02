@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../../styles/module.css'
+import '../../styles/modal.css'
 
 const Modal = ({ bookMarkId, isOpen, onClose }) => {
   if (!isOpen) return null;
