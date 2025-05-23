@@ -9,10 +9,9 @@ export default function main() {
   const bookMarkId = useSelector((state) => state.userInput.inputValue);
 
   const deleteBookMark = async ({linkURL, linkName, bookMarkId}) => {
-
     try {
-      const res = await fetch('/api/deleteBookMark', {
-        method: 'POST',
+      const res = await fetch('/api/CRUDbookMark', {
+        method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -36,12 +35,13 @@ export default function main() {
   useEffect(() => {
     const readBookMark = async () => {
       try {
-        const res = await fetch(`/api/bookMarkList?bookMarkId=${bookMarkId}`);
+        const res = await fetch(`/api/CRUDbookMark?bookMarkId=${bookMarkId}`);
         if(!res.ok){
           throw new Error("불러오기 실패");
         }
         const data = await res.json();
-        setLinkData(data);
+        setLinkData(data.data);
+        console.log(data.data);
       } catch (error) {
         console.error('불러오기 오류 :', error);
       }

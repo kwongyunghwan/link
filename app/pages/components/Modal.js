@@ -11,7 +11,7 @@ const [linkImage, setlinkImage] = useState('');
 const InsertBookMark = async(e) =>{
   e.preventDefault();
   try{
-    const res = await fetch('/api/createBookMark',{
+    const res = await fetch('/api/CRUDbookMark',{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
