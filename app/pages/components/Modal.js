@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import '../../styles/modal.css'
 
 const Modal = ({ bookMarkId, isOpen, onClose }) => {
@@ -9,7 +10,7 @@ const [linkName, setlinkName] = useState('');
 const [linkImage, setlinkImage] = useState('');
 
 const InsertBookMark = async(e) =>{
-  e.preventDefault();
+  e.preventDefault(); 
   try{
     const res = await fetch('/api/CRUDbookMark',{
       method: 'POST',
@@ -17,13 +18,14 @@ const InsertBookMark = async(e) =>{
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
+        itemID: uuidv4(),
         linkURL: linkURL.startsWith("http") ? linkURL : "http://" + linkURL,
         linkName: linkName,
         linkImage: linkImage,
         bookMarkId: bookMarkId,
       })
     });
-    console.log("생성 완료",'submit values:', {linkURL, linkName,linkImage,bookMarkId});
+    console.log("생성 완료",'submit values:', { linkURL, linkName,linkImage,bookMarkId});
     onClose();
   }catch(error){
     console.error("생성 오류", error)

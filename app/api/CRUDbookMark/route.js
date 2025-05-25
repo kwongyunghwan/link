@@ -2,11 +2,13 @@
 import { connectToDatabase } from '../../../lib/mongo';
 import { successResponse, errorResponse } from '@/lib/apiResponse';
 
+const {db} = await connectToDatabase();
+
 // READ 북마크 가져오기
 export async function GET(req) {
     const { searchParams } = new URL(req.url);
     const bookMarkId = searchParams.get('bookMarkId');
-    const {db} = await connectToDatabase();
+    
     try {
       const result = await db.collection('data').find({ bookMarkId: bookMarkId }).toArray();
       
@@ -21,12 +23,11 @@ export async function GET(req) {
 // CREATE 북마크 생성
 export async function POST(req){
 
-  const {db} = await connectToDatabase();
-
   try{
-    const { linkURL, linkName, linkImage, bookMarkId } = await req.json();
+    const { itemID, linkURL, linkName, linkImage, bookMarkId } = await req.json();
     
     await db.collection('data').insertOne({
+      itemID,
       linkURL,
       linkName,
       linkImage,
@@ -42,14 +43,15 @@ export async function POST(req){
 
 // UPDATE 북마크 수정
 export async function PATCH(req){
-  const {db} = await connectToDatabase();
-
   try{
-    const {linkURL, linkName, bookMarkId} = await req.json();
-    await db.collection('data').updateOne({
-      linkURL,
-      linkName,
-      bookMarkId
+    const {itemID, linkURL, linkName, bookMarkId} = await req.json();
+    await db.collection('data').updateOne({itemID: itemID},
+      {
+        $set:{
+        linkURL : linkURL,
+        linkName : linkName,
+        bookMarkId : bookMarkId
+      }
     });
     return successResponse({ message: '성공적으로 북마크를 수정했습니다.' }, 200);
   }catch(error){
@@ -61,13 +63,10 @@ export async function PATCH(req){
 // DELETE 북마크 삭제
 export async function DELETE(req){
 
-  const {db} = await connectToDatabase();
-  
   try{
-    const {linkURL, linkName, bookMarkId} = await req.json();
+    const {itemID, bookMarkId} = await req.json();
     await db.collection('data').deleteOne({
-      linkURL,
-      linkName,
+      itemID,
       bookMarkId
     });
 

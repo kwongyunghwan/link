@@ -7,15 +7,15 @@ export default function main() {
   const [linkData, setLinkData] = useState([]);
   const [isModalOpen, setModalOpen] = useState(false);
   const bookMarkId = useSelector((state) => state.userInput.inputValue);
-
-  const deleteBookMark = async ({linkURL, linkName, bookMarkId}) => {
+  
+  const deleteBookMark = async ({itemID, bookMarkId}) => {
     try {
       const res = await fetch('/api/CRUDbookMark', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ linkURL, linkName, bookMarkId })
+        body: JSON.stringify({ itemID, bookMarkId })
       });
 
       if(!res.ok){
@@ -58,7 +58,8 @@ export default function main() {
             return(
               <div key ={index} className="link_layout">
               <img src="/favicon.ico" className ="link_image"/><a target="_blank" href={e.linkURL}>{e.linkName}</a>
-              <img src="/delete.png" className="link_delete_image" onClick={()=>deleteBookMark({linkURL: e.linkURL, linkName: e.linkName, bookMarkId})}/>
+              <img src="/delete.png" className="link_delete_image" onClick={()=>deleteBookMark({itemID: e.itemID, bookMarkId})}/>
+              
               </div>
             )
           })
