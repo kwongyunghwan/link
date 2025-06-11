@@ -8,10 +8,14 @@ const {db} = await connectToDatabase();
 export async function GET(req) {
     const { searchParams } = new URL(req.url);
     const bookMarkId = searchParams.get('bookMarkId');
-    
+    const itemId = searchParams.get('itemId');
+    let result = '';
     try {
-      const result = await db.collection('data').find({ bookMarkId: bookMarkId }).toArray();
-      
+      if(itemId){
+        result = await db.collection('data').findOne({ itemId: itemId });
+      }else if(bookMarkId){
+        result = await db.collection('data').find({ bookMarkId: bookMarkId }).toArray();
+      }
       return successResponse(result, 200);
 
     } catch (error) {
@@ -24,10 +28,10 @@ export async function GET(req) {
 export async function POST(req){
 
   try{
-    const { itemID, linkURL, linkName, linkImage, bookMarkId } = await req.json();
+    const { itemId, linkURL, linkName, linkImage, bookMarkId } = await req.json();
     
     await db.collection('data').insertOne({
-      itemID,
+      itemId,
       linkURL,
       linkName,
       linkImage,
@@ -44,8 +48,8 @@ export async function POST(req){
 // UPDATE 북마크 수정
 export async function PATCH(req){
   try{
-    const {itemID, linkURL, linkName, bookMarkId} = await req.json();
-    await db.collection('data').updateOne({itemID: itemID},
+    const {itemId, linkURL, linkName, bookMarkId} = await req.json();
+    await db.collection('data').updateOne({itemId: itemId},
       {
         $set:{
         linkURL : linkURL,
@@ -64,9 +68,9 @@ export async function PATCH(req){
 export async function DELETE(req){
 
   try{
-    const {itemID, bookMarkId} = await req.json();
+    const {itemId, bookMarkId} = await req.json();
     await db.collection('data').deleteOne({
-      itemID,
+      itemId,
       bookMarkId
     });
 

@@ -1,24 +1,45 @@
-import React, { useState } from 'react';
+import React, { useEffect,useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import '../../styles/modal.css'
 
-const Modal = ({ bookMarkId, isOpen, onClose }) => {
-  if (!isOpen) return null;
-
+const Modal = ({ bookMarkId, itemId, isOpen, onClose }) => {
+const [linkData, setLinkData] = useState([]);
 const [linkURL, setlinkURL] = useState('');
 const [linkName, setlinkName] = useState('');
 const [linkImage, setlinkImage] = useState('');
 
+useEffect(() => { 
+  if(itemId){
+    const readBookMark = async () => {
+      try {
+        const res = await fetch(`/api/bookMark?itemId=${itemId}`);
+        if(!res.ok){
+          throw new Error("불러오기 실패");
+        }
+        const data = await res.json();
+        const item = data.data;
+        setlinkURL(item.linkURL || '');
+        setlinkName(item.linkName || '');
+        setlinkImage(item.linkImage || '');
+      } catch (error) {
+        console.error('불러오기 오류 :', error);
+      }
+    };
+    readBookMark();
+    }
+  }, [itemId]);
+
+if (!isOpen) return null;
 const InsertBookMark = async(e) =>{
   e.preventDefault(); 
   try{
-    const res = await fetch('/api/CRUDbookMark',{
-      method: 'POST',
+    const res = await fetch('/api/bookMark',{
+      method: itemId ? 'PATCH' : 'POST',  
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        itemID: uuidv4(),
+        itemId: itemId ? itemId : uuidv4(),
         linkURL: linkURL.startsWith("http") ? linkURL : "http://" + linkURL,
         linkName: linkName,
         linkImage: linkImage,
