@@ -9,6 +9,11 @@ export default function main() {
   const bookMarkId = useSelector((state) => state.userInput.inputValue);
   const [selectedItemId, setSelectedItemId] = useState("");
   
+  const copyBookMark = async() =>{
+    navigator.clipboard.writeText(bookMarkId);
+    alert(`북마크 코드가 복사되었습니다.(${bookMarkId})`);
+  };
+
   const deleteBookMark = async ({itemId, bookMarkId}) => {
     try {
       const res = await fetch('/api/bookMark', {
@@ -31,7 +36,7 @@ export default function main() {
     } catch (error) {
       console.error('삭제 오류:', error);
     }
-  }
+  };
   
   useEffect(() => {
     const readBookMark = async () => {
@@ -54,6 +59,9 @@ export default function main() {
 
   return (
       <div>
+        <div className="plus_link_layout" onClick={()=>{setModalOpen(true);setSelectedItemId('')}}>
+          <img src="/link_plus.png" className ="link_image"/> 
+        </div>
         {
           linkData.map((e,index)=>{
             return(
@@ -65,12 +73,9 @@ export default function main() {
             )
           })
         }
-        <div className="plus_link_layout" onClick={()=>{setModalOpen(true);}}>
-          <img src="/link_plus.png" className ="link_image"/> 
-        </div>
         <Modal key={selectedItemId || 'new'} bookMarkId={bookMarkId} itemId={selectedItemId} isOpen={isModalOpen} onClose={()=>{setModalOpen(false);}}>
         </Modal>
-
+        <div><button className="copy_button" onClick={()=>copyBookMark()}>북마크 코드 복사</button></div>
         <p className="down_bar">by kwon gyung hwan</p>
       </div>
   )

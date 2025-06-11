@@ -52,7 +52,7 @@ const InsertBookMark = async(e) =>{
         bookMarkId: bookMarkId,
       })
     });
-    console.log("생성 완료",'submit values:', { linkURL, linkName,linkImage,bookMarkId});
+    console.log("생성 완료",'submit values:', { itemId, linkURL, linkName,linkImage,bookMarkId});
     onClose();
   }catch(error){
     console.error("생성 오류", error)

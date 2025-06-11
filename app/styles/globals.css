@@ -28,9 +28,11 @@ a{
   padding: 20px;
 }
 .down_bar{
-  float:right;
-  font-size:15px;
-  margin-right:10px;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  font-size: 15px;
+  margin: 0;
 }
 .plus_link_layout{
   margin: 20px auto;
@@ -53,6 +55,25 @@ a{
   text-align:center;
   padding:10px;
   height:30px;
+}
+.copy_button{
+  position: fixed;
+  bottom: 50px;
+  right: 10px;
+  font-size: 13px;
+  width: fit-content;
+  background: white;
+  color: grey;
+  border-radius: 10px;
+  text-align: center;
+  padding: 10px;
+  height: 30px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.copy_button:hover {
+  background: #f8f8f8;
 }
 .des_container{
   display: flex;
