@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import crypto from 'crypto';
 import Link from "next/link";
 import './styles/modal.css';
 import { useDispatch } from 'react-redux';
@@ -42,7 +42,7 @@ export default function Home() {
     </form>
     <div className='title'>
     <Link href="/pages/main">
-      <button className='createButton' onClick={()=>{dispatch(setInputValue(uuidv4()))}}>새로 생성</button>
+      <button className='createButton' onClick={()=>{dispatch(setInputValue(crypto.randomBytes(4).toString('hex')))}}>새로 생성</button>
     </Link>
     </div>
   </div>

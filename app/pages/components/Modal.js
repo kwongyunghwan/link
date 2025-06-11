@@ -1,5 +1,5 @@
 import React, { useEffect,useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import crypto from 'crypto';
 import '../../styles/modal.css'
 
 const Modal = ({ bookMarkId, itemId, isOpen, onClose }) => {
@@ -9,7 +9,8 @@ const [linkName, setlinkName] = useState('');
 const [linkImage, setlinkImage] = useState('');
 
 useEffect(() => { 
-  if(itemId){
+  
+  if(isOpen && itemId){
     const readBookMark = async () => {
       try {
         const res = await fetch(`/api/bookMark?itemId=${itemId}`);
@@ -26,8 +27,13 @@ useEffect(() => {
       }
     };
     readBookMark();
-    }
-  }, [itemId]);
+    } else {
+        // 새 항목 추가 모드: 상태 초기화
+        setlinkURL('');
+        setlinkName('');
+        setlinkImage('');
+      }
+  }, [isOpen, itemId]);
 
 if (!isOpen) return null;
 const InsertBookMark = async(e) =>{
@@ -39,7 +45,7 @@ const InsertBookMark = async(e) =>{
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        itemId: itemId ? itemId : uuidv4(),
+        itemId: itemId ? itemId : crypto.randomBytes(4).toString('hex'),
         linkURL: linkURL.startsWith("http") ? linkURL : "http://" + linkURL,
         linkName: linkName,
         linkImage: linkImage,

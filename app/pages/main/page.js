@@ -9,14 +9,14 @@ export default function main() {
   const bookMarkId = useSelector((state) => state.userInput.inputValue);
   const [selectedItemId, setSelectedItemId] = useState("");
   
-  const deleteBookMark = async ({itemID, bookMarkId}) => {
+  const deleteBookMark = async ({itemId, bookMarkId}) => {
     try {
       const res = await fetch('/api/bookMark', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ itemID, bookMarkId })
+        body: JSON.stringify({ itemId, bookMarkId })
       });
 
       if(!res.ok){
