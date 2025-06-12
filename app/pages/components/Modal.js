@@ -39,18 +39,22 @@ if (!isOpen) return null;
 const InsertBookMark = async(e) =>{
   e.preventDefault(); 
   try{
+    const formData = new FormData();
+    formData.append('itemId', itemId ? itemId : crypto.randomBytes(4).toString('hex'));
+    formData.append('linkURL', linkURL.startsWith("http") ? linkURL : "http://" + linkURL);
+    formData.append('linkName', linkName);
+    formData.append('bookMarkId', bookMarkId);
+
+    const fileInput = document.querySelector('input[type="file"]');
+    if(fileInput.files[0]){
+      formData.append('linkImage', fileInput.files[0]);
+    }else{
+      formData.append('linkImage', '');
+    }
+
     const res = await fetch('/api/bookMark',{
       method: itemId ? 'PATCH' : 'POST',  
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        itemId: itemId ? itemId : crypto.randomBytes(4).toString('hex'),
-        linkURL: linkURL.startsWith("http") ? linkURL : "http://" + linkURL,
-        linkName: linkName,
-        linkImage: linkImage,
-        bookMarkId: bookMarkId,
-      })
+      body: formData
     });
     console.log("생성 완료",'submit values:', { itemId, linkURL, linkName,linkImage,bookMarkId});
     onClose();
@@ -67,8 +71,32 @@ const InsertBookMark = async(e) =>{
             <p>북마크할 링크를 작성해 주세요.</p>
                 <div className='modal_sub'>URL<input className='modal_input' type = "text" value={linkURL} onChange={(e)=> setlinkURL(e.target.value)}/></div>
                 <div className='modal_sub'>Name <input className='modal_input' type = "text" value={linkName} onChange={(e)=> setlinkName(e.target.value)}/></div>
-                <div className='modal_sub'>이미지 <input className='modal_input' type = "file" value={linkImage} onChange={(e)=> setlinkImage(e.target.value)}/></div>
-                <div className='submit_button'><button type="submit">추가</button></div>
+                <div className='modal_sub'>이미지 {linkImage && (
+              <img 
+                src={linkImage.startsWith('/uploads/') ? linkImage : `/uploads/${linkImage}`}
+                title={`현재 파일: ${linkImage}`}
+                style={{
+                  width: '20px', 
+                  height: '20px', 
+                  marginLeft: '10px',
+                  verticalAlign: 'middle',
+                  objectFit: 'cover',
+                  borderRadius: '3px'
+                }}
+                onError={(e) => {
+                  // 이미지 로드 실패 시 기본 아이콘으로 대체
+                 e.target.style.display = 'none';
+                }}
+              />
+            )} <input className='modal_input' type = "file" onChange={(e) => {
+                const file = e.target.files[0];
+                if (file) {
+                  // 파일명만 추출 (경로 제거)
+                  const fileName = file.name;
+                  setlinkImage(fileName);
+                }
+              }}/></div>
+                <div className='submit_button'><button type="submit">{itemId ? '수정' : '추가'}</button></div>
           </form>
       </div>
     </div>

@@ -43,7 +43,7 @@ export default function main() {
       try {
         const res = await fetch(`/api/bookMark?bookMarkId=${bookMarkId}`);
         if(!res.ok){
-          throw new Error("불러오기 실패");
+          throw new Error("불러오기 실패"); 
         }
         const data = await res.json();
         setLinkData(data.data);
@@ -59,6 +59,7 @@ export default function main() {
 
   return (
       <div>
+        <div className="des_container">북마크 코드 : {bookMarkId}</div>
         <div className="plus_link_layout" onClick={()=>{setModalOpen(true);setSelectedItemId('')}}>
           <img src="/link_plus.png" className ="link_image"/> 
         </div>
@@ -66,7 +67,7 @@ export default function main() {
           linkData.map((e,index)=>{
             return(
               <div key ={index} className="link_layout">
-              <img src="/favicon.ico" className ="link_image"/><a target="_blank" href={e.linkURL}>{e.linkName}</a>
+              <img src={e.linkImage ? e.linkImage : "/favicon.ico"} className ="link_image"/><a target="_blank" href={e.linkURL}>{e.linkName}</a>
               <img src="/delete.png" className="link_delete_image" onClick={()=>deleteBookMark({itemId: e.itemId, bookMarkId})}/>
               <img src="/update.png" className="link_delete_image" onClick={()=>{setModalOpen(true);setSelectedItemId(e.itemId);}}/>
               </div>
