@@ -67,8 +67,8 @@ export default function main() {
           linkData.map((e,index)=>{
             return(
               <div key ={index} className="link_layout">
-              <img src={e.linkImage ? e.linkImage : "/favicon.ico"} className ="link_image"/><a target="_blank" href={e.linkURL}>{e.linkName}</a>
-              <img src="/delete.png" className="link_delete_image" onClick={()=>deleteBookMark({itemId: e.itemId, bookMarkId})}/>
+              {e.linkImage && <img src={e.linkImage} className="link_image" onError={(e) => e.target.style.display = 'none'} />}<a target="_blank" href={e.linkURL}>{e.linkName}</a>
+                     <img src="/delete.png" className="link_delete_image" onClick={()=>deleteBookMark({itemId: e.itemId, bookMarkId})}/>
               <img src="/update.png" className="link_delete_image" onClick={()=>{setModalOpen(true);setSelectedItemId(e.itemId);}}/>
               </div>
             )
