@@ -47,7 +47,6 @@ export default function main() {
         }
         const data = await res.json();
         setLinkData(data.data);
-        console.log(data.data);
       } catch (error) {
         console.error('불러오기 오류 :', error);
       }
