@@ -14,7 +14,7 @@
 .modal {
   position: relative;
   background: white;
-  width: 45%;
+  width: 25%;
   border-radius: 5px;
   padding: 20px;
 }
@@ -121,10 +121,11 @@
 }
 
 .modal_input {
-  width: 200px;
+  width: 100%; /* 200px 대신 100% */
+  max-width: 200px; /* 최대 200px로 제한 */
   margin: 0;
   flex: 1;
-  height: 30px; /* 고정 높이 */
+  height: 40px; /* 고정 높이 */
   padding: 5px 10px; /* 패딩 추가 */
   box-sizing: border-box; /* 패딩 포함한 크기 계산 */
   border: 1px solid #ccc;

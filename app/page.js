@@ -25,21 +25,23 @@ export default function Home() {
   return (
     <div>
     <div className='des_container'>
-      <span>이전에 생성한 북마크가 있다면 <span className='bold'>북마크 코드</span>를 입력해 주세요.</span>
+      <span>나만의 북마크를 관리하고 공유해봐요!</span>
+      <span>이전에 생성한 북마크가 있다면 아래에 <span className='bold'>북마크 코드</span>를 입력해 주시고</span>
       <span>생성한 북마크가 없다면 <span className='bold'>'새로 생성'</span> 버튼을 눌러주세요.</span>
     </div>
-    <div className='title_sub'><h3>북마크 코드</h3></div>
-    <form className='title_sub' onSubmit={joinClick}>
-        <input 
-          className='modal_input' 
-          type="text" 
-          value={id} 
-          onChange={(e) => setId(e.target.value)} 
-          placeholder="북마크 코드 입력란"
-          
-        />
-        <button type="submit" className='joinButton'>접속</button>
-    </form>
+    <div className='title_sub'>
+  <h3>북마크 코드</h3>
+</div>
+<form className='input_form' onSubmit={joinClick}>
+  <input 
+    className='bookMark_input' 
+    type="text" 
+    value={id} 
+    onChange={(e) => setId(e.target.value)} 
+    placeholder="북마크 코드 입력란"
+  />
+  <button type="submit" className='joinButton'>접속</button>
+</form>
     <div className='title'>
     <Link href="/pages/main">
       <button className='createButton' onClick={()=>{dispatch(setInputValue(crypto.randomBytes(4).toString('hex')))}}>새로 생성</button>

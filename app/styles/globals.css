@@ -14,9 +14,32 @@ a{
   margin-top: 5%;
 
 }
-
 .title_sub {
-  text-align: center;
+  text-align: center; /* h3 가운데 정렬 */
+}
+.title_sub form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+.bookMark_input {
+  width: 200px;
+  margin: 0;
+  height: 40px; /* 고정 높이 */
+  padding: 5px 10px; /* 패딩 추가 */
+  box-sizing: border-box; /* 패딩 포함한 크기 계산 */
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 14px;
+  line-height: 1; /* 입력창 라인 높이 */
+  vertical-align: middle; /* 수직 정렬 */
+}
+.input_form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
 }
 .title_image{
   width: 100px;
@@ -116,27 +139,54 @@ a{
   padding:10px;
 }
 .createButton{
-  background: white;
-  color: grey;
-  border-radius:5px;
-  text-align:center;
-  margin-left:10px;
-  width:20%;
-  font-size:18px;
-  height:100%;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
-  border: 0px;
+  transition: all 0.3s ease;
 }
-.joinButton{
-  background: white;
-  color: grey;
-  border-radius:5px;
-  text-align:center;
-  margin-left:10px;
-  width:5%;
-  height:100%;
+/*  버튼 hover 효과 */
+.createButton:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+}
+
+/* 새로 생성 버튼 클릭 효과 */
+.createButton:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 123, 255, 0.2);
+}
+.joinButton {
+  height: 40px; /* 입력칸과 동일한 높이 */
+  padding: 0 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
-  border: 0px;
+  transition: all 0.3s ease;
+  margin: 0; /* 기존 margin-top 제거 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.joinButton:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+}
+
+.joinButton:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 123, 255, 0.2);
 }
 .link_image{
   width: 30px;
