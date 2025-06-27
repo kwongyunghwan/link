@@ -3,7 +3,6 @@ import crypto from 'crypto';
 import '../../styles/modal.css'
 
 const Modal = ({ bookMarkId, itemId, isOpen, onClose }) => {
-const [linkData, setLinkData] = useState([]);
 const [linkURL, setlinkURL] = useState('');
 const [linkName, setlinkName] = useState('');
 const [linkImage, setlinkImage] = useState('');

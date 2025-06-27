@@ -4,7 +4,7 @@ import Modal from '../components/Modal';
 import { useSelector } from 'react-redux';
 
 export default function main() {
-  const [linkData, setLinkData] = useState([]);
+  const [bookMarkData, setBookMarkData] = useState([]);
   const [isModalOpen, setModalOpen] = useState(false);
   const bookMarkId = useSelector((state) => state.userInput.inputValue);
   const [selectedItemId, setSelectedItemId] = useState("");
@@ -46,14 +46,14 @@ export default function main() {
           throw new Error("불러오기 실패"); 
         }
         const data = await res.json();
-        setLinkData(data.data);
+        setBookMarkData(data.data);
       } catch (error) {
         console.error('불러오기 오류 :', error);
       }
     };
 
     readBookMark();
-  }, [linkData]);
+  }, [bookMarkData]);
 
 
   return (
@@ -63,7 +63,7 @@ export default function main() {
           <img src="/link_plus.png" className ="link_image"/> 
         </div>
         {
-          linkData.map((e,index)=>{
+          bookMarkData.map((e,index)=>{
             return(
               <div key ={index} className="link_layout">
               {e.linkImage && <img src={e.linkImage} className="link_image" onError={(e) => e.target.style.display = 'none'} />}<a target="_blank" href={e.linkURL}>{e.linkName}</a>
