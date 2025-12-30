@@ -8,13 +8,13 @@ export default function main() {
   const [isModalOpen, setModalOpen] = useState(false);
   const bookMarkId = useSelector((state) => state.userInput.inputValue);
   const [selectedItemId, setSelectedItemId] = useState("");
-  
-  const copyBookMark = async() =>{
+
+  const copyBookMark = async () => {
     navigator.clipboard.writeText(bookMarkId);
     alert(`북마크 코드가 복사되었습니다.(${bookMarkId})`);
   };
 
-  const deleteBookMark = async ({itemId, bookMarkId}) => {
+  const deleteBookMark = async ({ itemId, bookMarkId }) => {
     try {
       const res = await fetch('/api/bookMark', {
         method: 'DELETE',
@@ -24,7 +24,7 @@ export default function main() {
         body: JSON.stringify({ itemId, bookMarkId })
       });
 
-      if(!res.ok){
+      if (!res.ok) {
         throw new Error("삭제 실패");
       }
       const result = await res.json();
@@ -37,13 +37,13 @@ export default function main() {
       console.error('삭제 오류:', error);
     }
   };
-  
+
   useEffect(() => {
     const readBookMark = async () => {
       try {
         const res = await fetch(`/api/bookMark?bookMarkId=${bookMarkId}`);
-        if(!res.ok){
-          throw new Error("불러오기 실패"); 
+        if (!res.ok) {
+          throw new Error("불러오기 실패");
         }
         const data = await res.json();
         setBookMarkData(data.data);
@@ -57,26 +57,48 @@ export default function main() {
 
 
   return (
-      <div>
-        <div className="des_container">북마크 코드 : {bookMarkId}</div>
-        <div className="plus_link_layout" onClick={()=>{setModalOpen(true);setSelectedItemId('')}}>
-          <img src="/link_plus.png" className ="link_image"/> 
-        </div>
-        {
-          bookMarkData.map((e,index)=>{
-            return(
-              <div key ={index} className="link_layout">
-              {e.linkImage && <img src={e.linkImage} className="link_image" onError={(e) => e.target.style.display = 'none'} />}<a target="_blank" href={e.linkURL}>{e.linkName}</a>
-                     <img src="/delete.png" className="link_delete_image" onClick={()=>deleteBookMark({itemId: e.itemId, bookMarkId})}/>
-              <img src="/update.png" className="link_delete_image" onClick={()=>{setModalOpen(true);setSelectedItemId(e.itemId);}}/>
-              </div>
-            )
-          })
-        }
-        <Modal key={selectedItemId || 'new'} bookMarkId={bookMarkId} itemId={selectedItemId} isOpen={isModalOpen} onClose={()=>{setModalOpen(false);}}>
-        </Modal>
-        <div><button className="copy_button" onClick={()=>copyBookMark()}>북마크 코드 복사</button></div>
-        <p className="down_bar">by kwon gyung hwan</p>
+    <div>
+      <div className="des_container">북마크 코드 : {bookMarkId}</div>
+      <div className="plus_link_layout" onClick={() => { setModalOpen(true); setSelectedItemId('') }}>
+        <img src="/link_plus.png" className="link_image" />
       </div>
+      {
+        bookMarkData.map((e, index) => {
+          return (
+            <div key={index} className="link_layout">
+              {e.linkImage && (
+                <img
+                  src={e.linkImage}
+                  className="link_image"
+                  onError={(e) => e.target.style.display = 'none'}
+                />
+              )}
+              <a target="_blank" href={e.linkURL}>{e.linkName}</a>
+
+              <div className="link_actions">
+                <button
+                  className="action_btn edit_btn"
+                  onClick={() => { setModalOpen(true); setSelectedItemId(e.itemId); }}
+                  title="수정"
+                >
+                  ✏️
+                </button>
+                <button
+                  className="action_btn delete_btn"
+                  onClick={() => deleteBookMark({ itemId: e.itemId, bookMarkId })}
+                  title="삭제"
+                >
+                  🗑️
+                </button>
+              </div>
+            </div>
+          )
+        })
+      }
+      <Modal key={selectedItemId || 'new'} bookMarkId={bookMarkId} itemId={selectedItemId} isOpen={isModalOpen} onClose={() => { setModalOpen(false); }}>
+      </Modal>
+      <div><button className="copy_button" onClick={() => copyBookMark()}>북마크 코드 복사</button></div>
+      <p className="down_bar">by kwon gyung hwan</p>
+    </div>
   )
 }

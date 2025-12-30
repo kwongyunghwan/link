@@ -188,16 +188,90 @@ a{
   transform: translateY(0);
   box-shadow: 0 2px 4px rgba(0, 123, 255, 0.2);
 }
-.link_image{
-  width: 30px;
-  margin-right:5px;
-  vertical-align: middle;
+.link_layout {
+  margin: 20px auto;
+  width: 200px;
+  background: white;
+  color: grey;
+  border-radius: 10px;
+  text-align: center;
+  padding: 10px;
+  min-height: 30px; /* height: 30px 대신 */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  position: relative;
 }
-.link_delete_image{
+
+/* 링크 이미지 */
+.link_image {
   width: 30px;
-  margin-right:5px;
-  vertical-align: middle;
-  float:right;
+  height: 30px;
+  object-fit: cover;
+  border-radius: 5px;
+  flex-shrink: 0;
+}
+
+/* 링크 텍스트 */
+.link_layout a {
+  flex: 1;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* 액션 버튼 컨테이너 */
+.link_actions {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+/* 공통 버튼 스타일 */
+.action_btn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.action_btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.action_btn:active {
+  transform: translateY(0);
+}
+
+/* 수정 버튼 */
+.edit_btn {
+  background: #f0f0f0;
+  color: #666;
+}
+
+.edit_btn:hover {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+/* 삭제 버튼 */
+.delete_btn {
+  background: #f0f0f0;
+  color: #666;
+}
+
+.delete_btn:hover {
+  background: #ffebee;
+  color: #d32f2f;
 }
 .bold{
   font-weight: bold;
