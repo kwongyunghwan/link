@@ -105,7 +105,7 @@ npm run dev
 
 ---
 
-## 🔌 API 엔드포인트
+## API 엔드포인트
 
 ### GET `/api/bookMark`
 
