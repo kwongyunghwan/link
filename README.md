@@ -1,9 +1,3 @@
-## 북마크 홈
-<img width="831" height="567" alt="image" src="https://github.com/user-attachments/assets/76a82e76-fa4e-439e-ac37-279ba957fe0d" />
-
-## 북마크 수정 & 추가버튼시 화면
-<img width="819" height="721" alt="image" src="https://github.com/user-attachments/assets/b492e60d-542f-4360-8baf-fbc56dd060c8" />
-
 # 🔖 북마크 관리 시스템
 
 Next.js와 MongoDB를 활용한 북마크 관리 및 공유 웹 애플리케이션
@@ -11,6 +5,12 @@ Next.js와 MongoDB를 활용한 북마크 관리 및 공유 웹 애플리케이�
 ![북마크 메인](https://img.shields.io/badge/Next.js-14.0.3-black?style=flat-square&logo=next.js)
 ![MongoDB](https://img.shields.io/badge/MongoDB-6.3.0-green?style=flat-square&logo=mongodb)
 ![React](https://img.shields.io/badge/React-18-blue?style=flat-square&logo=react)
+
+## 북마크 홈
+<img width="831" height="567" alt="image" src="https://github.com/user-attachments/assets/76a82e76-fa4e-439e-ac37-279ba957fe0d" />
+
+## 북마크 수정 & 추가버튼시 화면
+<img width="819" height="721" alt="image" src="https://github.com/user-attachments/assets/b492e60d-542f-4360-8baf-fbc56dd060c8" />
 
 ## 📌 프로젝트 소개
 
